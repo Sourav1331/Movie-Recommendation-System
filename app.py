@@ -107,9 +107,7 @@ section[data-testid="stSidebar"] {
     background-color: #020617;
     border-right: 1px solid rgba(255,255,255,0.08);
 }
-section[data-testid="stSidebar"] * {
-    color: white !important;
-}
+
 
 header[data-testid="stHeader"] {
     background: rgba(2,6,23,0.95);
