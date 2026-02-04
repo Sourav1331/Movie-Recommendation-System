@@ -95,7 +95,7 @@ st.markdown("""
 <style>
 
 /* ===============================
-   GLOBAL BACKGROUND (FULL BLACK)
+   GLOBAL BACKGROUND
    =============================== */
 html, body {
     background-color: #020617;
@@ -105,6 +105,13 @@ html, body {
 .stApp {
     background: radial-gradient(circle at top, #020617 0%, #020617 45%, #000000 100%);
     color: white;
+}
+
+/* ===============================
+   HEADER
+   =============================== */
+header[data-testid="stHeader"] {
+    background: rgba(2,6,23,0.95);
 }
 
 /* ===============================
@@ -126,20 +133,66 @@ section[data-testid="stSidebar"] span {
 }
 
 /* ===============================
-   INPUTS (SELECTBOX, TEXT, ETC.)
+   INPUTS (TEXT, SELECT, ETC.)
    =============================== */
 section[data-testid="stSidebar"] input,
-section[data-testid="stSidebar"] textarea,
-section[data-testid="stSidebar"] select,
-section[data-testid="stSidebar"] [data-baseweb="select"] > div {
-    background-color: #0f172a !important;
+section[data-testid="stSidebar"] textarea {
+    background-color: #020617 !important;
+    color: white !important;
     border: 1px solid rgba(255,255,255,0.15) !important;
     border-radius: 10px !important;
 }
 
-/* Placeholder */
+/* Placeholder text */
 section[data-testid="stSidebar"] ::placeholder {
     color: #94a3b8 !important;
+}
+
+/* ===============================
+   SELECTBOX – CLOSED STATE
+   =============================== */
+section[data-testid="stSidebar"] [data-baseweb="select"] > div {
+    background-color: #020617 !important;
+    color: white !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    border-radius: 10px !important;
+}
+
+/* Selected value text */
+section[data-testid="stSidebar"] [data-baseweb="select"] span {
+    color: white !important;
+}
+
+/* ===============================
+   SELECTBOX – DROPDOWN MENU
+   =============================== */
+div[data-baseweb="menu"] {
+    background-color: #020617 !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.85) !important;
+}
+
+/* Dropdown list */
+div[data-baseweb="menu"] ul {
+    background-color: #020617 !important;
+}
+
+/* Dropdown items */
+div[data-baseweb="menu"] li {
+    background-color: #020617 !important;
+    color: white !important;
+    border-radius: 8px;
+}
+
+/* Hover */
+div[data-baseweb="menu"] li:hover {
+    background-color: #0f172a !important;
+}
+
+/* Selected item */
+div[data-baseweb="menu"] li[aria-selected="true"] {
+    background-color: #1e293b !important;
 }
 
 /* ===============================
@@ -154,6 +207,7 @@ section[data-testid="stSidebar"] [data-testid="stSlider"] {
    =============================== */
 section[data-testid="stSidebar"] button {
     background-color: #020617 !important;
+    color: white !important;
     border: 2px solid #ef4444 !important;
     border-radius: 12px !important;
     font-weight: 600;
@@ -163,13 +217,6 @@ section[data-testid="stSidebar"] button {
 section[data-testid="stSidebar"] button:hover {
     background-color: #0f172a !important;
     border-color: #f87171 !important;
-}
-
-/* ===============================
-   HEADER BAR
-   =============================== */
-header[data-testid="stHeader"] {
-    background: rgba(2,6,23,0.95);
 }
 
 /* ===============================
@@ -186,30 +233,30 @@ header[data-testid="stHeader"] {
    =============================== */
 .movie-card {
     background-color: rgba(15,23,42,0.9);
-    border-radius:16px;
-    padding:12px;
-    height:360px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.6);
+    border-radius: 16px;
+    padding: 12px;
+    height: 360px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
     transition: transform .2s ease, box-shadow .2s ease;
 }
 
 .movie-card:hover {
     transform: translateY(-6px);
-    box-shadow:0 14px 25px rgba(0,0,0,0.8);
+    box-shadow: 0 14px 25px rgba(0,0,0,0.8);
 }
 
 .movie-poster {
-    width:100%;
-    height:260px;
-    border-radius:12px;
-    object-fit:cover;
+    width: 100%;
+    height: 260px;
+    border-radius: 12px;
+    object-fit: cover;
 }
 
 .movie-title {
-    margin-top:8px;
-    font-size:14px;
-    font-weight:600;
-    text-align:center;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -217,7 +264,6 @@ header[data-testid="stHeader"] {
 
 </style>
 """, unsafe_allow_html=True)
-
 
 
 
