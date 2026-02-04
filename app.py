@@ -94,49 +94,101 @@ def recommend(movie, n):
 st.markdown("""
 <style>
 
+/* ===============================
+   GLOBAL BACKGROUND (FULL BLACK)
+   =============================== */
 html, body {
     background-color: #020617;
 }
 
+/* App container */
 .stApp {
     background: radial-gradient(circle at top, #020617 0%, #020617 45%, #000000 100%);
     color: white;
 }
 
+/* ===============================
+   SIDEBAR
+   =============================== */
 section[data-testid="stSidebar"] {
-    background-color: #020617;
+    background-color: #020617 !important;
     border-right: 1px solid rgba(255,255,255,0.08);
 }
 
+/* Sidebar text */
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] label,
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] span {
+    color: white !important;
+}
 
+/* ===============================
+   INPUTS (SELECTBOX, TEXT, ETC.)
+   =============================== */
+section[data-testid="stSidebar"] input,
+section[data-testid="stSidebar"] textarea,
+section[data-testid="stSidebar"] select,
+section[data-testid="stSidebar"] [data-baseweb="select"] > div {
+    background-color: #0f172a !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    border-radius: 10px !important;
+}
+
+/* Placeholder */
+section[data-testid="stSidebar"] ::placeholder {
+    color: #94a3b8 !important;
+}
+
+/* ===============================
+   SLIDER
+   =============================== */
+section[data-testid="stSidebar"] [data-testid="stSlider"] {
+    color: white;
+}
+
+/* ===============================
+   BUTTONS
+   =============================== */
+section[data-testid="stSidebar"] button {
+    background-color: #020617 !important;
+    border: 2px solid #ef4444 !important;
+    border-radius: 12px !important;
+    font-weight: 600;
+}
+
+/* Button hover */
+section[data-testid="stSidebar"] button:hover {
+    background-color: #0f172a !important;
+    border-color: #f87171 !important;
+}
+
+/* ===============================
+   HEADER BAR
+   =============================== */
 header[data-testid="stHeader"] {
     background: rgba(2,6,23,0.95);
 }
 
+/* ===============================
+   MAIN CONTENT WIDTH
+   =============================== */
 .main > div {
     max-width: 1400px;
     margin: auto;
     padding-top: 1rem;
 }
 
-img {
-    max-height: 420px;
-    object-fit: cover;
-    border-radius: 14px;
-}
-
-div[data-baseweb="tab-list"] {
-    margin-top: 12px;
-}
-
+/* ===============================
+   MOVIE CARDS
+   =============================== */
 .movie-card {
     background-color: rgba(15,23,42,0.9);
     border-radius:16px;
     padding:12px;
     height:360px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     box-shadow:0 4px 12px rgba(0,0,0,0.6);
     transition: transform .2s ease, box-shadow .2s ease;
 }
@@ -165,6 +217,7 @@ div[data-baseweb="tab-list"] {
 
 </style>
 """, unsafe_allow_html=True)
+
 
 
 
