@@ -93,10 +93,40 @@ def recommend(movie, n):
 # ---------------- STYLES ----------------
 st.markdown("""
 <style>
+
+/* Entire app background */
+html, body, [class*="css"] {
+    background-color: #020617;
+}
+
+/* Main app container */
 .stApp {
-    background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+    background: radial-gradient(circle at top, #020617 0%, #020617 40%, #000000 100%);
     color: white;
 }
+
+/* Sidebar background */
+section[data-testid="stSidebar"] {
+    background-color: #020617;
+    border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Sidebar text */
+section[data-testid="stSidebar"] * {
+    color: white !important;
+}
+
+/* Top header bar */
+header[data-testid="stHeader"] {
+    background: rgba(2,6,23,0.95);
+}
+
+/* Remove default padding artifacts */
+.main > div {
+    padding-top: 1rem;
+}
+
+/* Movie cards */
 .movie-card {
     background-color: rgba(15,23,42,0.9);
     border-radius:16px;
@@ -105,16 +135,19 @@ st.markdown("""
     box-shadow:0 4px 12px rgba(0,0,0,0.6);
     transition: transform .2s ease, box-shadow .2s ease;
 }
+
 .movie-card:hover {
     transform: translateY(-6px);
     box-shadow:0 14px 25px rgba(0,0,0,0.8);
 }
+
 .movie-poster {
     width:100%;
     height:280px;
     border-radius:12px;
     object-fit:cover;
 }
+
 .movie-title {
     margin-top:8px;
     font-size:14px;
@@ -124,8 +157,10 @@ st.markdown("""
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 </style>
 """, unsafe_allow_html=True)
+
 
 
 # ---------------- SIDEBAR ----------------
