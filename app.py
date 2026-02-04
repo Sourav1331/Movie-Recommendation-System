@@ -94,44 +94,51 @@ def recommend(movie, n):
 st.markdown("""
 <style>
 
-/* Entire app background */
-html, body, [class*="css"] {
+html, body {
     background-color: #020617;
 }
 
-/* Main app container */
 .stApp {
-    background: radial-gradient(circle at top, #020617 0%, #020617 40%, #000000 100%);
+    background: radial-gradient(circle at top, #020617 0%, #020617 45%, #000000 100%);
     color: white;
 }
 
-/* Sidebar background */
 section[data-testid="stSidebar"] {
     background-color: #020617;
     border-right: 1px solid rgba(255,255,255,0.08);
 }
-
-/* Sidebar text */
 section[data-testid="stSidebar"] * {
     color: white !important;
 }
 
-/* Top header bar */
 header[data-testid="stHeader"] {
     background: rgba(2,6,23,0.95);
 }
 
-/* Remove default padding artifacts */
 .main > div {
+    max-width: 1400px;
+    margin: auto;
     padding-top: 1rem;
 }
 
-/* Movie cards */
+img {
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+div[data-baseweb="tab-list"] {
+    margin-top: 12px;
+}
+
 .movie-card {
     background-color: rgba(15,23,42,0.9);
     border-radius:16px;
     padding:12px;
     height:360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     box-shadow:0 4px 12px rgba(0,0,0,0.6);
     transition: transform .2s ease, box-shadow .2s ease;
 }
@@ -143,7 +150,7 @@ header[data-testid="stHeader"] {
 
 .movie-poster {
     width:100%;
-    height:280px;
+    height:260px;
     border-radius:12px;
     object-fit:cover;
 }
