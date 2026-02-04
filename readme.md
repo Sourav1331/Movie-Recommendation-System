@@ -46,9 +46,11 @@ The app recommends movies similar to a selected title and displays **real-time p
 ## 🚀 Getting Started
 
 ### 1️⃣ Clone the repository
-```bash
+
 git clone https://github.com/Sourav1331/Movie-Recommendation-System.git
 cd movie-recommendation-system
+
+---
 
 ## ⚠️ Data Files
 
