@@ -12,7 +12,7 @@ if not API_KEY:
     st.error("TMDB API key not found. Please set TMDB_API_KEY in your .env file.")
     st.stop()
 
-# ---------------- PAGE CONFIG ----------------
+# ---------------- PAGE CONFIG -------------
 st.set_page_config(page_title="Movie Recommendation System", layout="wide")
 
 # ---------------- LOAD DATA ----------------
