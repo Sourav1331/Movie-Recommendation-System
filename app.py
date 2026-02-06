@@ -4,7 +4,7 @@ import requests
 import os
 from dotenv import load_dotenv
 
-# ---------------- LOAD ENV ----------------
+# LOAD ENV 
 load_dotenv()
 
 API_KEY = os.getenv("TMDB_API_KEY")
@@ -12,10 +12,10 @@ if not API_KEY:
     st.error("TMDB API key not found. Please set TMDB_API_KEY in your .env file.")
     st.stop()
 
-# ---------------- PAGE CONFIG -------------
+# PAGE CONFIG 
 st.set_page_config(page_title="Movie Recommendation System", layout="wide")
 
-# ---------------- LOAD DATA ----------------
+# LOAD DATA 
 with open("movies.pkl", "rb") as f:
     movies = pickle.load(f)
 
@@ -24,7 +24,7 @@ with open("similarity.pkl", "rb") as f:
 
 movies_list = movies["title"].values.tolist()
 
-# ---------------- SESSION STATE ----------------
+# SESSION STATE
 if "recs" not in st.session_state:
     st.session_state.recs = None
 
@@ -38,7 +38,7 @@ if "active_trailer_title" not in st.session_state:
     st.session_state.active_trailer_title = None
 
 
-# ---------------- HELPER FUNCTIONS ----------------
+# HELPER FUNCTIONS 
 @st.cache_data(ttl=3600)
 def fetch_poster(movie_id):
     try:
@@ -90,41 +90,30 @@ def recommend(movie, n):
     return names, posters, ids
 
 
-# ---------------- STYLES ----------------
+# STYLES
 st.markdown("""
 <style>
 
-/* ==================================================
-   GLOBAL APP
-   ================================================== */
 html, body {
     background-color: #020617 !important;
 }
 
-/* ===============================
-   TEXT VISIBILITY FIX
-   =============================== */
-
-/* Main title */
 h1 {
     font-weight: 800 !important;
     color: #ffffff !important;
     letter-spacing: 0.3px;
 }
 
-/* Section headers (Recommended because...) */
 h2, h3 {
     font-weight: 700 !important;
     color: #ffffff !important;
 }
 
-/* Caption / subtitle */
 .stCaption, .stMarkdown p {
     color: #e5e7eb !important;
     font-weight: 500 !important;
 }
 
-/* Sidebar header */
 section[data-testid="stSidebar"] h1 {
     font-weight: 800 !important;
 }
@@ -134,16 +123,11 @@ section[data-testid="stSidebar"] h1 {
     color: white !important;
 }
 
-/* ==================================================
-   HEADER
-   ================================================== */
 header[data-testid="stHeader"] {
     background-color: #020617 !important;
 }
 
-/* ==================================================
-   SIDEBAR
-   ================================================== */
+
 section[data-testid="stSidebar"] {
     background-color: #020617 !important;
     border-right: 1px solid rgba(255,255,255,0.1);
@@ -153,9 +137,6 @@ section[data-testid="stSidebar"] * {
     color: white !important;
 }
 
-/* ==================================================
-   SELECTBOX – CLOSED STATE
-   ================================================== */
 section[data-testid="stSidebar"] [data-baseweb="select"] > div {
     background-color: #020617 !important;
     border: 1px solid rgba(255,255,255,0.2) !important;
@@ -168,21 +149,15 @@ section[data-testid="stSidebar"] [data-baseweb="select"] input {
     -webkit-text-fill-color: white !important;
 }
 
-/* Dropdown arrow */
 section[data-testid="stSidebar"] svg {
     fill: white !important;
 }
-
-/* ==================================================
-   SELECTBOX – DROPDOWN MENU (DEPLOY SAFE)
-   ================================================== */
 
 /* Popover container */
 div[data-baseweb="popover"] {
     background-color: #020617 !important;
 }
 
-/* Menu wrapper */
 div[data-baseweb="menu"] {
     background-color: #020617 !important;
     border: 1px solid rgba(255,255,255,0.15) !important;
@@ -190,45 +165,32 @@ div[data-baseweb="menu"] {
     box-shadow: 0 15px 40px rgba(0,0,0,0.85) !important;
 }
 
-/* List */
 div[data-baseweb="menu"] ul {
     background-color: #020617 !important;
 }
 
-/* Items */
 div[data-baseweb="menu"] li {
     background-color: #020617 !important;
     color: white !important;
     border-radius: 8px !important;
 }
 
-/* Hover */
 div[data-baseweb="menu"] li:hover {
     background-color: #0f172a !important;
 }
 
-/* Selected */
 div[data-baseweb="menu"] li[aria-selected="true"] {
     background-color: #1e293b !important;
 }
 
-/* ==================================================
-   SLIDER
-   ================================================== */
 section[data-testid="stSidebar"] [data-testid="stSlider"] {
     color: white !important;
 }
 
-/* ==================================================
-   BUTTONS – STREAMLIT CLOUD SAFE
-   ================================================== */
-
-/* Button wrapper */
 div[data-testid="stButton"] {
     background: transparent !important;
 }
 
-/* Actual button */
 div[data-testid="stButton"] > button {
     background-color: #020617 !important;
     color: white !important;
@@ -239,24 +201,17 @@ div[data-testid="stButton"] > button {
     width: 100% !important;
 }
 
-/* Hover */
 div[data-testid="stButton"] > button:hover {
     background-color: #0f172a !important;
     border-color: #f87171 !important;
 }
 
-/* ==================================================
-   MAIN CONTENT WIDTH
-   ================================================== */
 .main > div {
     max-width: 1400px;
     margin: auto;
     padding-top: 1rem;
 }
 
-/* ==================================================
-   MOVIE CARDS
-   ================================================== */
 .movie-card {
     background-color: rgba(15,23,42,0.9);
     border-radius: 16px;
@@ -304,7 +259,6 @@ div[data-testid="stButton"] > button {
     line-height: 1.2 !important;
 }
 
-/* Keep text on one line */
 div[data-testid="stButton"] > button {
     white-space: nowrap !important;
 }
@@ -314,10 +268,9 @@ div[data-testid="column"] {
     padding-right: 0.25rem !important;
 }
 
-/* Poster image */
 .movie-poster {
     width: 100% !important;
-    height: 300px !important;      /* slightly bigger for deploy */
+    height: 300px !important;
     max-height: 320px !important;
     object-fit: cover !important;
     display: block !important;
@@ -328,7 +281,7 @@ div[data-testid="column"] {
 
 
 
-# ---------------- SIDEBAR ----------------
+# SIDEBAR
 with st.sidebar:
     st.header("🎬 Movie Recommender")
 
@@ -350,15 +303,15 @@ with st.sidebar:
                 st.session_state.active_trailer_title = None
 
 
-# ---------------- HEADER ----------------
+# HEADER
 st.title("🍿 Movie Recommendation System")
 st.caption("Discover movies similar to the one you love.")
 
-# ---------------- EMPTY STATE ----------------
+# EMPTY STATE
 if selected_movie == "--Select--" and not st.session_state.recs:
     st.info("👈 Select a movie from the sidebar to see details and recommendations.")
 
-# ---------------- SELECTED MOVIE DETAILS ----------------
+# SELECTED MOVIE DETAILS
 if selected_movie != "--Select--":
     row = movies[movies["title"] == selected_movie].iloc[0]
     col1, col2 = st.columns([1, 2])
@@ -387,7 +340,7 @@ if selected_movie != "--Select--":
             else:
                 st.info("Trailer not available for this movie.")
 
-# ---------------- RECOMMENDATIONS ----------------
+# RECOMMENDATIONS
 if st.session_state.recs:
     st.markdown("---")
     names, posters, ids = st.session_state.recs
@@ -424,7 +377,7 @@ if st.session_state.recs:
 
 
 
-# ---------------- FULL WIDTH TRAILER ----------------
+# FULL WIDTH TRAILER 
 if st.session_state.active_trailer:
     st.markdown("---")
     col1, col2 = st.columns([6, 1])
