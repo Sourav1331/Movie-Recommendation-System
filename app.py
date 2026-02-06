@@ -309,6 +309,20 @@ div[data-testid="stButton"] > button {
     white-space: nowrap !important;
 }
             
+div[data-testid="column"] {
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+}
+
+/* Poster image */
+.movie-poster {
+    width: 100% !important;
+    height: 320px !important;      /* slightly bigger for deploy */
+    max-height: 320px !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+            
 </style>
 """, unsafe_allow_html=True)
 
