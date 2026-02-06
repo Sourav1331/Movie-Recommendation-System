@@ -206,8 +206,6 @@ section[data-testid="stSidebar"] [data-testid="stSlider"] {
    BUTTONS
    =============================== */
 section[data-testid="stSidebar"] button {
-    background-color: #020617 !important;
-    color: white !important;
     border: 2px solid #ef4444 !important;
     border-radius: 12px !important;
     font-weight: 600;
