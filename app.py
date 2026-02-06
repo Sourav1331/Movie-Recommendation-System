@@ -247,14 +247,14 @@ section[data-testid="stSidebar"] button:hover {
 
 .movie-poster {
     width: 100%;
-    height: 260px;
+    height: 290px;
     border-radius: 12px;
     object-fit: cover;
 }
 
 .movie-title {
     margin-top: 8px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     text-align: center;
     white-space: nowrap;
