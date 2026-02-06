@@ -317,7 +317,7 @@ div[data-testid="column"] {
 /* Poster image */
 .movie-poster {
     width: 100% !important;
-    height: 320px !important;      /* slightly bigger for deploy */
+    height: 300px !important;      /* slightly bigger for deploy */
     max-height: 320px !important;
     object-fit: cover !important;
     display: block !important;
