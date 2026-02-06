@@ -94,95 +94,112 @@ def recommend(movie, n):
 st.markdown("""
 <style>
 
-/* ===============================
-   GLOBAL BACKGROUND
-   =============================== */
+/* ==================================================
+   GLOBAL APP
+   ================================================== */
 html, body {
-    background-color: #020617;
+    background-color: #020617 !important;
 }
 
-/* App container */
+/* ===============================
+   TEXT VISIBILITY FIX
+   =============================== */
+
+/* Main title */
+h1 {
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    letter-spacing: 0.3px;
+}
+
+/* Section headers (Recommended because...) */
+h2, h3 {
+    font-weight: 700 !important;
+    color: #ffffff !important;
+}
+
+/* Caption / subtitle */
+.stCaption, .stMarkdown p {
+    color: #e5e7eb !important;
+    font-weight: 500 !important;
+}
+
+/* Sidebar header */
+section[data-testid="stSidebar"] h1 {
+    font-weight: 800 !important;
+}
+
 .stApp {
-    background: radial-gradient(circle at top, #020617 0%, #020617 45%, #000000 100%);
-    color: white;
+    background: radial-gradient(circle at top, #020617 0%, #020617 45%, #000000 100%) !important;
+    color: white !important;
 }
 
-/* ===============================
+/* ==================================================
    HEADER
-   =============================== */
+   ================================================== */
 header[data-testid="stHeader"] {
-    background: rgba(2,6,23,0.95);
+    background-color: #020617 !important;
 }
 
-/* ===============================
+/* ==================================================
    SIDEBAR
-   =============================== */
+   ================================================== */
 section[data-testid="stSidebar"] {
     background-color: #020617 !important;
-    border-right: 1px solid rgba(255,255,255,0.08);
+    border-right: 1px solid rgba(255,255,255,0.1);
 }
 
-/* Sidebar text */
-section[data-testid="stSidebar"] h1,
-section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3,
-section[data-testid="stSidebar"] label,
-section[data-testid="stSidebar"] p,
-section[data-testid="stSidebar"] span {
+section[data-testid="stSidebar"] * {
     color: white !important;
 }
 
-/* ===============================
-   INPUTS (TEXT, SELECT, ETC.)
-   =============================== */
-section[data-testid="stSidebar"] input,
-section[data-testid="stSidebar"] textarea {
-    background-color: black ;
-    color: white !important;
-    border: 1px solid rgba(255,255,255,0.15) !important;
-    border-radius: 10px !important;
-}
-
-/* Placeholder text */
-section[data-testid="stSidebar"] ::placeholder {
-    color: #94a3b8 !important;
-}
-
-/* ===============================
+/* ==================================================
    SELECTBOX – CLOSED STATE
-   =============================== */
+   ================================================== */
 section[data-testid="stSidebar"] [data-baseweb="select"] > div {
     background-color: #020617 !important;
-    color: white !important;
-    border: 1px solid rgba(255,255,255,0.15) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
     border-radius: 10px !important;
 }
 
-/* Selected value text */
-section[data-testid="stSidebar"] [data-baseweb="select"] span {
+section[data-testid="stSidebar"] [data-baseweb="select"] input {
+    background-color: #020617 !important;
     color: white !important;
+    -webkit-text-fill-color: white !important;
 }
 
-/* ===============================
-   SELECTBOX – DROPDOWN MENU
-   =============================== */
+/* Dropdown arrow */
+section[data-testid="stSidebar"] svg {
+    fill: white !important;
+}
+
+/* ==================================================
+   SELECTBOX – DROPDOWN MENU (DEPLOY SAFE)
+   ================================================== */
+
+/* Popover container */
+div[data-baseweb="popover"] {
+    background-color: #020617 !important;
+}
+
+/* Menu wrapper */
 div[data-baseweb="menu"] {
-    background-color: black ;
+    background-color: #020617 !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
     border-radius: 12px !important;
-    border: 1px solid rgba(255,255,255,0.1) !important;
     box-shadow: 0 15px 40px rgba(0,0,0,0.85) !important;
 }
 
-/* Dropdown list */
+/* List */
 div[data-baseweb="menu"] ul {
     background-color: #020617 !important;
 }
 
-/* Dropdown items */
+/* Items */
 div[data-baseweb="menu"] li {
     background-color: #020617 !important;
     color: white !important;
-    border-radius: 8px;
+    border-radius: 8px !important;
 }
 
 /* Hover */
@@ -190,48 +207,56 @@ div[data-baseweb="menu"] li:hover {
     background-color: #0f172a !important;
 }
 
-/* Selected item */
+/* Selected */
 div[data-baseweb="menu"] li[aria-selected="true"] {
     background-color: #1e293b !important;
 }
 
-/* ===============================
+/* ==================================================
    SLIDER
-   =============================== */
+   ================================================== */
 section[data-testid="stSidebar"] [data-testid="stSlider"] {
-    color: white;
+    color: white !important;
 }
 
-/* ===============================
-   BUTTONS
-   =============================== */
-section[data-testid="stSidebar"] button {
-    background-color: gray;
-    color: white;
-   
+/* ==================================================
+   BUTTONS – STREAMLIT CLOUD SAFE
+   ================================================== */
+
+/* Button wrapper */
+div[data-testid="stButton"] {
+    background: transparent !important;
+}
+
+/* Actual button */
+div[data-testid="stButton"] > button {
+    background-color: #020617 !important;
+    color: white !important;
     border: 2px solid #ef4444 !important;
     border-radius: 12px !important;
-    font-weight: 600;
+    padding: 0.55rem 1rem !important;
+    font-weight: 600 !important;
+    width: 100% !important;
 }
 
-/* Button hover */
-section[data-testid="stSidebar"] button:hover {
+/* Hover */
+div[data-testid="stButton"] > button:hover {
     background-color: #0f172a !important;
     border-color: #f87171 !important;
 }
 
-/* ===============================
+/* ==================================================
    MAIN CONTENT WIDTH
-   =============================== */
+   ================================================== */
 .main > div {
     max-width: 1400px;
     margin: auto;
     padding-top: 1rem;
 }
 
-/* ===============================
+/* ==================================================
    MOVIE CARDS
-   =============================== */
+   ================================================== */
 .movie-card {
     background-color: rgba(15,23,42,0.9);
     border-radius: 16px;
@@ -261,6 +286,14 @@ section[data-testid="stSidebar"] button:hover {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+            
+div[data-testid="stButton"] > button {
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.35rem !important;
 }
 
 </style>
