@@ -296,6 +296,19 @@ div[data-testid="stButton"] > button {
     gap: 0.35rem !important;
 }
 
+div[data-testid="stButton"] > button {
+    width: auto !important;              
+    max-width: fit-content !important;   
+    padding: 0.45rem 0.9rem !important;  
+    margin: 0 auto !important;           
+    line-height: 1.2 !important;
+}
+
+/* Keep text on one line */
+div[data-testid="stButton"] > button {
+    white-space: nowrap !important;
+}
+            
 </style>
 """, unsafe_allow_html=True)
 
