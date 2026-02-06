@@ -137,7 +137,7 @@ section[data-testid="stSidebar"] span {
    =============================== */
 section[data-testid="stSidebar"] input,
 section[data-testid="stSidebar"] textarea {
-    background-color: #020617 !important;
+    background-color: black ;
     color: white !important;
     border: 1px solid rgba(255,255,255,0.15) !important;
     border-radius: 10px !important;
@@ -167,7 +167,7 @@ section[data-testid="stSidebar"] [data-baseweb="select"] span {
    SELECTBOX – DROPDOWN MENU
    =============================== */
 div[data-baseweb="menu"] {
-    background-color: #020617 !important;
+    background-color: black ;
     border-radius: 12px !important;
     border: 1px solid rgba(255,255,255,0.1) !important;
     box-shadow: 0 15px 40px rgba(0,0,0,0.85) !important;
