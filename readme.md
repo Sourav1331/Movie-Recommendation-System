@@ -52,10 +52,3 @@ cd movie-recommendation-system
 
 ---
 
-## ⚠️ Data Files
-
-The `.pkl` files are not included due to GitHub size limits.
-
-To run the project:
-1. Preprocess the dataset
-2. Generate `movies.pkl` and `similarity.pkl`
