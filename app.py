@@ -37,6 +37,8 @@ if "active_trailer" not in st.session_state:
 if "active_trailer_title" not in st.session_state:
     st.session_state.active_trailer_title = None
 
+if "rec_page" not in st.session_state:
+    st.session_state.rec_page = 0
 
 # HELPER FUNCTIONS 
 @st.cache_data(ttl=3600)
@@ -50,8 +52,7 @@ def fetch_poster(movie_id):
         if poster_path:
             return f"https://image.tmdb.org/t/p/w500{poster_path}"
     except Exception:
-        pass
-    return None
+        return None
 
 
 @st.cache_data(ttl=3600)
@@ -153,7 +154,6 @@ section[data-testid="stSidebar"] svg {
     fill: white !important;
 }
 
-/* Popover container */
 div[data-baseweb="popover"] {
     background-color: #020617 !important;
 }
@@ -190,15 +190,26 @@ section[data-testid="stSidebar"] [data-testid="stSlider"] {
 div[data-testid="stButton"] {
     background: transparent !important;
 }
-
+            
 div[data-testid="stButton"] > button {
     background-color: #020617 !important;
     color: white !important;
     border: 2px solid #ef4444 !important;
     border-radius: 12px !important;
-    padding: 0.55rem 1rem !important;
+
+    padding: 0.45rem 0.9rem !important;
     font-weight: 600 !important;
-    width: 100% !important;
+    line-height: 1.2 !important;
+
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.35rem !important;
+
+    width: auto !important;
+    max-width: fit-content !important;
+    margin: 0 auto !important;
+    white-space: nowrap !important;
 }
 
 div[data-testid="stButton"] > button:hover {
@@ -226,13 +237,6 @@ div[data-testid="stButton"] > button:hover {
     box-shadow: 0 14px 25px rgba(0,0,0,0.8);
 }
 
-.movie-poster {
-    width: 100%;
-    height: 290px;
-    border-radius: 12px;
-    object-fit: cover;
-}
-
 .movie-title {
     margin-top: 8px;
     font-size: 15px;
@@ -242,27 +246,7 @@ div[data-testid="stButton"] > button:hover {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-            
-div[data-testid="stButton"] > button {
-    white-space: nowrap !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 0.35rem !important;
-}
-
-div[data-testid="stButton"] > button {
-    width: auto !important;              
-    max-width: fit-content !important;   
-    padding: 0.45rem 0.9rem !important;  
-    margin: 0 auto !important;           
-    line-height: 1.2 !important;
-}
-
-div[data-testid="stButton"] > button {
-    white-space: nowrap !important;
-}
-            
+                      
 div[data-testid="column"] {
     padding-left: 0.25rem !important;
     padding-right: 0.25rem !important;
@@ -301,6 +285,8 @@ with st.sidebar:
                 st.session_state.recs_movie = selected_movie
                 st.session_state.active_trailer = None
                 st.session_state.active_trailer_title = None
+                st.session_state.rec_page = 0
+
 
 
 # HEADER
@@ -349,13 +335,26 @@ if st.session_state.recs:
         f"Recommended because you liked **{st.session_state.recs_movie}**"
     )
 
-    cols = st.columns(len(names))
+    CARDS_PER_PAGE = 5
 
-    for i in range(len(names)):
-        poster_url = posters[i] or "https://via.placeholder.com/300x450?text=No+Image"
-        trailer = fetch_trailer_url(ids[i])
+    total = len(names)
+    start = st.session_state.rec_page * CARDS_PER_PAGE
+    end = start + CARDS_PER_PAGE
 
-        tmdb_url = f"https://www.themoviedb.org/movie/{ids[i]}"
+    visible_names = names[start:end]
+    visible_posters = posters[start:end]
+    visible_ids = ids[start:end]
+
+    cols = st.columns(5)
+    st.markdown('<div class="movie-row">', unsafe_allow_html=True)
+
+
+
+    for i in range(len(visible_names)):
+        poster_url = visible_posters[i] or "https://via.placeholder.com/300x450?text=No+Image"
+        trailer = fetch_trailer_url(visible_ids[i])
+
+        tmdb_url = f"https://www.themoviedb.org/movie/{visible_ids[i]}"
 
         with cols[i]:
             st.markdown(
@@ -364,17 +363,41 @@ if st.session_state.recs:
                     <a href="{tmdb_url}" target="_blank">
                         <img class="movie-poster" src="{poster_url}">
                     </a>
-                    <p class="movie-title">{names[i]}</p>
+                    <p class="movie-title">{visible_names[i]}</p>
                 </div>
                 """,
                 unsafe_allow_html=True
             )
 
             if trailer:
-                if st.button("▶ Watch Trailer", key=f"trailer_{ids[i]}"):
+                if st.button("▶ Watch Trailer", key=f"trailer_{visible_ids[i]}"):
                     st.session_state.active_trailer = trailer
-                    st.session_state.active_trailer_title = names[i]
+                    st.session_state.active_trailer_title = visible_names[i]
 
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    if total > CARDS_PER_PAGE:
+        nav1, nav2, nav3 = st.columns([1, 2, 1])
+
+        with nav1:
+            if st.session_state.rec_page > 0:
+                if st.button("◀ Previous"):
+                    st.session_state.rec_page -= 1
+                    st.session_state.active_trailer = None
+                    st.session_state.active_trailer_title = None
+                    st.rerun()
+
+
+        with nav2:
+            st.caption(f"Showing {start + 1}–{min(end, total)} of {total}")
+
+        with nav3:
+            if end < total:
+                if st.button("Next ▶"):
+                    st.session_state.rec_page += 1
+                    st.session_state.active_trailer = None
+                    st.session_state.active_trailer_title = None
+                    st.rerun()
 
 
 # FULL WIDTH TRAILER 
